@@ -8,7 +8,7 @@ import (
 )
 
 func GenerateJWT(email, role string) (string, error) {
-	var mySignKey = []byte(secretKey)
+	var mySignKey = []byte("secretKey")
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
 

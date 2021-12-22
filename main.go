@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"golang-jwt-demo/database"
+	"golang-jwt-demo/middleware"
 	"golang-jwt-demo/models"
 	"golang-jwt-demo/routers"
 	"log"
@@ -13,8 +14,10 @@ import (
 )
 
 func InitializeRouter(router *mux.Router) {
-	router.HandleFunc("/SignUp", routers.SignUp).Methods("POST")
-	// router.HandleFunc("/SignIn", SignIn).Methods("POST")
+	router.HandleFunc("/register", routers.SignUp).Methods("POST")
+	router.HandleFunc("/login", routers.SigIn).Methods("POST")
+	router.HandleFunc("/user/", middleware.Authorization(routers.GetAllUser)).Methods("GET")
+
 }
 
 func CreateRouter() {
