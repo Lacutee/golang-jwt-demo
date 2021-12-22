@@ -1,23 +1,27 @@
 package main
 
 import (
+	"fmt"
 	"golang-jwt-demo/database"
 	"golang-jwt-demo/models"
 	"golang-jwt-demo/routers"
+	"log"
+	"net/http"
 
 	"github.com/gorilla/mux"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-var router *mux.Router
-
-func CreateRouter() {
-	router = mux.NewRouter()
-}
-
-func InitializeRouter() {
+func InitializeRouter(router *mux.Router) {
 	router.HandleFunc("/SignUp", routers.SignUp).Methods("POST")
 	// router.HandleFunc("/SignIn", SignIn).Methods("POST")
+}
+
+func CreateRouter() {
+	router := mux.NewRouter().StrictSlash(true)
+	fmt.Println("server running in port 8090")
+	InitializeRouter(router)
+	log.Fatal(http.ListenAndServe(":8090", router))
 }
 
 func initDB() {
@@ -42,5 +46,5 @@ func initDB() {
 func main() {
 	initDB()
 	CreateRouter()
-	InitializeRouter()
+
 }
