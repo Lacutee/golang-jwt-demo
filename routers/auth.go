@@ -64,9 +64,9 @@ func SigIn(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode("Invalid input!")
 	}
-	fmt.Println(auth)
+	// fmt.Println(auth)
 	database.Connector.Where("email = ?", auth.Email).First(&user)
-	fmt.Println(user.Email)
+	// fmt.Println(user.Email)
 	if user.Email == "" {
 		fmt.Println("Email not found!")
 		w.WriteHeader(http.StatusBadRequest)
