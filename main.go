@@ -3,6 +3,7 @@ package main
 import (
 	"golang-jwt-demo/database"
 	"golang-jwt-demo/models"
+	"golang-jwt-demo/routers"
 
 	"github.com/gorilla/mux"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -15,8 +16,8 @@ func CreateRouter() {
 }
 
 func InitializeRouter() {
-	router.HandleFunc("/SignUp", SignUp).Methods("POST")
-	router.HandleFunc("/SignIn", SignIn).Methods("POST")
+	router.HandleFunc("/SignUp", routers.SignUp).Methods("POST")
+	// router.HandleFunc("/SignIn", SignIn).Methods("POST")
 }
 
 func initDB() {
